@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body{
+  font-family: 'Noto Sans', sans-serif;
+}
+
+@layer components{
+  .underline-offset {
+    font-style:italic;
+    text-decoration: underline;
+  }
+  .vertical-text {
+    writing-mode: vertical-rl; /* Vertical text from right to left */
+    font-weight: bold;
+    font-size: 2.25rem; /* Adjust font size as needed */
+  }
+  .vertical-text-right {
+    writing-mode: vertical-rl; 
+    transform: rotate(180deg);
+    font-weight: bold;
+    font-size: 2.25rem; 
+  }
+  .album-container{
+    @apply mt-24 mx-24 flex justify-center;
+    position: relative;
+    width: 400px;
+    height: 400px;
+    overflow:hidden;
+  }
+  .album-container img {
+    transition: transform 0.3s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .album-container:hover img {
+    transform: scale(1.1); 
+    background-color: rgba(0, 0, 0, 0); 
+  }
+
+  .album-container .overlay-text {
+    position: absolute;
+    top: 50%; /* Adjust the top property to move the text up */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    opacity: 0;
+    transition: background-color 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+    height: 100%;
+    width: 100%;
+    padding: 20px; /* Add padding to create some space around the text */
+  }
+  .album-container:hover .overlay-text {
+    background-color: rgba(0, 0, 0, 0.5); 
+    opacity: 1; 
+    transform: translateY(-50%); /*Specify the transformation over here*/
+  }
+
+  .concept-image-slider{
+    @apply items-center justify-center;
+    margin: auto;
+  }
+  .hover-line::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 2px;
+    width: 0; /* Line starts hidden */
+    background-color: black; /* Line color */
+    transition: width 0.3s ease-in-out;
+  }
+  
+  .hover-line:hover::before {
+    width: 20px; /* Keep line width constant */
+  }
+  
+  .hover-line {
+    position: relative;
+    cursor: pointer;
+    transition: padding-left 0.3s ease-in-out;
+  }
+  
+  .hover-line:hover {
+    padding-left: 30px; /* Increase padding-left to create space after the line */
+  }
+
+  .active::before, .hover-line:hover::before, .hover-line.active::before {
+    width: 20px; /* Keep line width constant */
+    background-color: black; /* Ensure the line is visible */
+  }
+  
+  .active, .hover-line:hover, .hover-line.active {
+    padding-left: 30px; /* Ensure padding to maintain the text position */
+    color: black; /* Ensure text color remains black */
+  }
+  
+  
+  /* Tailwind configuration */
+  .concept-list-item {
+    @apply mb-12 text-gray-500 font-bold hover:text-black transition-all duration-300;
+  }
+
+  .concept-list-item-selected {
+    @apply mb-12 text-black font-bold;
+  }
+  
+
+  .artist-page-overlay {
+    position: fixed; /* Fixed positioning to make it stay in place even on scroll */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    background-color:white;
+    z-index: 1000; /* High z-index to ensure it's on top */
+  }
+  .artist-image{
+    @apply shadow-custom w-72 mt-10 mx-10 transition duration-100 
+    ease-in transform hover:-translate-y-3 cursor-pointer;
+  }
+  .artist-image-slider{
+    @apply shadow-custom items-center justify-center;
+    height: 100vh;
+    max-width: 100%;
+    object-fit: contain;
+  }
+  .header-hr{
+    @apply mt-6 border-gray-75;
+  }
+  .header-text{
+    @apply text-black font-bold mx-4 mt-4;
+  }
+  .footer-icon{
+        @apply relative flex items-center justify-center 
+        h-11 w-11 mt-2 mb-2 mx-auto bg-gray-2
+         text-white hover:bg-gray-50
+          hover:text-white  rounded-3xl hover:rounded-xl 
+          transition-all duration-300 ease-linear 
+          cursor-pointer;
+  }
+  .footer-tooltip{
+        @apply absolute w-auto p-2 m-2 min-w-max 
+        left-14 rounded-md shadow-md
+        text-white bg-gray-900 
+        text-xs font-bold 
+        transition-all duration-100 scale-0 origin-left;
+  }
+
+}
+
